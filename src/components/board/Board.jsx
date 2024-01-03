@@ -7,17 +7,25 @@ function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   const squareClickHandler = (i) => {
+    // to make copy of the board values
     const newSquareValue = squares.slice();
-    if (newSquareValue[i]) {
+
+    if (
+      newSquareValue[i] /* not to overwrite the value */ ||
+      calculateWinner(squares) /* to calculate the winner */
+    ) {
       return;
     }
+
+    // to check whoose turn is
     if (xIsNext) {
       newSquareValue[i] = "X";
     } else {
       newSquareValue[i] = "O";
     }
-    setSquares(newSquareValue);
-    setXIsNext(!xIsNext);
+
+    setSquares(newSquareValue); /* to set value when clicked */
+    setXIsNext(!xIsNext); /* to change the user */
   };
 
   return (
@@ -87,3 +95,27 @@ function Board() {
 }
 
 export default Board;
+
+function calculateWinner(squares) {
+  // all winning combinations
+  const possibleWinners = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  // checking all the combinations
+  for (let i = 0; i < possibleWinners.length; i++) {
+    const [a, b, c] = possibleWinners[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+
+  return null;
+}
