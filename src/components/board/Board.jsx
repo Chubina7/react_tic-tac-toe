@@ -3,12 +3,21 @@ import "./Board.css";
 import Square from "../square/Square";
 
 function Board() {
+  const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   const squareClickHandler = (i) => {
     const newSquareValue = squares.slice();
-    newSquareValue[i] = "X";
+    if (newSquareValue[i]) {
+      return;
+    }
+    if (xIsNext) {
+      newSquareValue[i] = "X";
+    } else {
+      newSquareValue[i] = "O";
+    }
     setSquares(newSquareValue);
+    setXIsNext(!xIsNext);
   };
 
   return (
