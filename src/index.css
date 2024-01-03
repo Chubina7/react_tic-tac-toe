@@ -15,7 +15,8 @@ body {
   flex-direction: column;
 }
 
-p {
+p,
+h1 {
   margin: 0;
   padding: 0;
 }

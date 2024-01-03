@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import "./Board.css";
 import Square from "../square/Square";
+import Modal from "../modal/Modal";
+import Btn from "../btn/Btn";
 
 function Board() {
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
 
+  // to start new game using reload
+  const startNewGameHandler = () => {
+    window.location.reload();
+  };
+
+  // actions when each of 9 squares is clicked
   const squareClickHandler = (i) => {
     // to make copy of the board values
     const newSquareValue = squares.slice();
@@ -32,9 +40,16 @@ function Board() {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = "Winner is: " + winner;
+    status = (
+      <Modal
+        statusMessage={`"${winner}" ` + "won the game"}
+        onRestart={startNewGameHandler}
+      />
+    );
   } else {
-    status = "Next player is: " + (xIsNext ? "X" : "O");
+    status = (
+      <h1 className="next-player-is">It is "{xIsNext ? "X" : "O"}" Turn</h1>
+    );
   }
 
   return (
@@ -103,7 +118,18 @@ function Board() {
       </div>
 
       <div className="status-bar">
-        <p>{status}</p>
+        <div>{status}</div>
+        <div className="btn-container">
+          <Btn
+            title="Restart Game"
+            onClick={startNewGameHandler}
+          />
+          <Btn
+            title="Back to previous move"
+            onClick={startNewGameHandler}
+            btnStatus="inactive"
+          />
+        </div>
       </div>
     </>
   );

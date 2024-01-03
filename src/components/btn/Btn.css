@@ -1,0 +1,28 @@
+.btn {
+  text-wrap: nowrap;
+  width: 100%;
+  padding: 14px 22px;
+  border-radius: 50px;
+  border: none;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  transition: 0.1s ease-in-out;
+}
+.btn:hover {
+  cursor: pointer;
+  background-color: rgb(45, 45, 45);
+}
+
+.inactive-btn {
+  cursor: no-drop;
+  text-wrap: nowrap;
+  width: 100%;
+  padding: 14px 22px;
+  border-radius: 50px;
+  border: none;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  opacity: 60%;
+}
