@@ -1,0 +1,13 @@
+.board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3px;
+}
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
